@@ -1,5 +1,5 @@
 {
-  "name": "koa2",
+  "name": "tdd",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,11 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "koa": "^2.2.0",
-    "koa-bodyparser": "^4.2.0",
-    "koa-router": "^7.1.1",
-    "koa-static": "^3.0.0",
-    "mime": "^1.3.4",
+    "mocha": "^3.3.0",
     "mz": "^2.6.0",
-    "nunjucks": "^3.0.0"
+    "supertest": "^3.0.0"
   }
 }

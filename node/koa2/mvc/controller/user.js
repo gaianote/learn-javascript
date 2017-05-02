@@ -1,6 +1,7 @@
-module.exports = function () {
-  router.get('user',() => {
-    console.log('user')
-  })
+const homepage = async (ctx, next) =>{
+  ctx.body = 'hello user!';
 }
 
+module.exports = {
+    'GET /:user': homepage
+};
