@@ -1,4 +1,3 @@
-
 var config = {
     dialect: 'mysql',
     database: 'test',
