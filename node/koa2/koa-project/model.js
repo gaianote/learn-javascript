@@ -1,21 +1,29 @@
-// scan all models defined in models:
 const fs = require('fs');
-const db = require('./db');
+const Sequelize = require('sequelize');
+const config = require('./config')
 
-let files = fs.readdirSync(__dirname + '/models');
+//链接数据库
+const sequelize = new Sequelize(config.database, config.username, config.password, {
+    host: config.host,
+    dialect: config.dialect,
+    pool: {
+        max: 5,
+        min: 0,
+        idle: 10000
+    }
+});
 
-let js_files = files.filter((f)=>{
-    return f.endsWith('.js');
-}, files);
-
+// 自动导入所有的 Model
 module.exports = {};
 
-for (let f of js_files) {
-    console.log(`import model from file ${f}...`);
-    let name = f.substring(0, f.length - 3);
-    module.exports[name] = require(__dirname + '/models/' + f);
+let files = fs.readdirSync(__dirname + '/models');
+for (let file of files) {
+    console.log(`import model from file ${file}...`);
+    let name = file.substring(0, file.length - 3);
+    model = require(__dirname + '/models/' + file);
+    module.exports[name] = sequelize.define(model['name'],model['define'])
 }
 
 module.exports.sync = () => {
-    return  db.sync();
+    return  sequelize.sync();
 };
